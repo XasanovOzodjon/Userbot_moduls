@@ -8,7 +8,7 @@ def register(app: Client):
         if not message.text:
             return
 
-        match = re.search(r"\*Range\s+(\d+)", message.text)
+        match = re.search(r"\*range\s+(\d+)", message.text)
         if match:
             try:
                 repeat_count = int(match.group(1))
