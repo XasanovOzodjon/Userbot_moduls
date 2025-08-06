@@ -3,7 +3,7 @@ import asyncio
 
 hearts = ["❤️", "🧡", "💛", "💚", "💙", "💜", "🤍", "🤎", "🖤"]
 
-def register_rgb_love(app: Client):
+def register(app: Client):  # <<—— BU YERDA NOM TO‘G‘RILANDI
     @app.on_message(filters.me & filters.private & filters.text & filters.regex(r"^\*RGBLove$"))
     async def rgb_love_handler(client, message):
         await message.delete()
