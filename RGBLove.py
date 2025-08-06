@@ -1,36 +1,21 @@
 from pyrogram import Client, filters
-import re
 import asyncio
 
-def register_range(app: Client):
-    @app.on_message(filters.me & filters.private)
-    async def range_handler(client, message):
-        if not message.text:
-            return
+hearts = ["❤️", "🧡", "💛", "💚", "💙", "💜", "🤍", "🤎", "🖤"]
 
-        match = re.search(r"\*Range\s+(\d+)", message.text)
-        if match:
-            try:
-                repeat_count = int(match.group(1))
-
-                # Agar reply qilingan bo‘lsa
-                if message.reply_to_message:
-                    for _ in range(repeat_count):
-                        await client.copy_message(
-                            chat_id=message.chat.id,
-                            from_chat_id=message.chat.id,
-                            message_id=message.reply_to_message.id
-                        )
-                        await asyncio.sleep(0.1)
-                    await message.delete()
-                else:
-                    # Oddiy text xabarni ko‘paytirish
-                    text_to_send = re.sub(r"\*Range\s+\d+", "", message.text).strip()
-                    if text_to_send:
-                        await message.delete()
-                        for _ in range(repeat_count):
-                            await client.send_message(message.chat.id, text_to_send)
-                            await asyncio.sleep(0.1)
-
-            except Exception as e:
-                print(f"Xatolik: {e}")
+def register_rgb_love(app: Client):
+    @app.on_message(filters.me & filters.private & filters.text & filters.regex(r"^\*RGBLove$"))
+    async def rgb_love_handler(client, message):
+        await message.delete()
+        edited_msg = await client.send_message(chat_id=message.chat.id, text="❤️")
+        last_heart = "❤️"
+        for _ in range(10):
+            for heart in hearts:
+                if heart != last_heart:
+                    try:
+                        await edited_msg.edit_text(heart)
+                        last_heart = heart
+                        await asyncio.sleep(0.2)
+                    except Exception as e:
+                        print(f"Xatolik: {e}")
+                        continue
