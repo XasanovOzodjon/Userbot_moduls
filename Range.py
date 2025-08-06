@@ -25,7 +25,7 @@ def register(app: Client):
                     await message.delete()
                 else:
                     # Oddiy matnni ko‘paytirish
-                    text_to_send = re.sub(r"\*Range\s+\d+", "", message.text).strip()
+                    text_to_send = re.sub(r"\*range\s+\d+", "", message.text).strip()
                     if text_to_send:
                         await message.delete()
                         for _ in range(repeat_count):
@@ -35,10 +35,10 @@ def register(app: Client):
             except Exception as e:
                 print(f"Xatolik: {e}")
 
-    @app.on_message(filters.command("Range_help", prefixes="*") & filters.me)
+    @app.on_message(filters.command("range_help", prefixes="*") & filters.me)
     async def range_help(client, message):
         await message.reply(
-            "🔁 `*Range <son>` — Xabarni <son> marta yuboradi.\n"
+            "🔁 `*range <son>` — Xabarni <son> marta yuboradi.\n"
             "- Agar siz xabarga reply qilsangiz — reply qilingan xabarni nusxalaydi.\n"
             "- Agar reply bo‘lmasa — shu xabar matnini yuboradi.\n"
             "✅ Guruh va shaxsiy chatlarda ishlaydi.",
