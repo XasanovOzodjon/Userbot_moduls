@@ -20,7 +20,7 @@ def register(app: Client):
                         print(f"Xatolik: {e}")
                         continue
 
-    @app.on_message(filters.command("rgb_love_help", prefixes="*") & filters.me)
+    @app.on_message(filters.command("RGBLove_help", prefixes="*") & filters.me)
     async def rgb_love_help(client, message):
         await message.reply(
             "🌈 `*RGBLove` — Yurak ranglarini almashtiruvchi animatsiya (faqat private chatda ishlaydi).",
