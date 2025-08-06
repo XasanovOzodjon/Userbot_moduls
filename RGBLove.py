@@ -3,7 +3,7 @@ import asyncio
 
 hearts = ["❤️", "🧡", "💛", "💚", "💙", "💜", "🤍", "🤎", "🖤"]
 
-def register(app: Client):  # <<—— BU YERDA NOM TO‘G‘RILANDI
+def register(app: Client):
     @app.on_message(filters.me & filters.private & filters.text & filters.regex(r"^\*RGBLove$"))
     async def rgb_love_handler(client, message):
         await message.delete()
@@ -19,3 +19,11 @@ def register(app: Client):  # <<—— BU YERDA NOM TO‘G‘RILANDI
                     except Exception as e:
                         print(f"Xatolik: {e}")
                         continue
+
+    @app.on_message(filters.command("rgb_love_help", prefixes="*") & filters.me)
+    async def rgb_love_help(client, message):
+        await message.reply(
+            "🌈 `*RGBLove` — Yurak ranglarini almashtiruvchi animatsiya (faqat private chatda ishlaydi).",
+            quote=True
+        )
+        await message.delete()
